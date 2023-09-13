@@ -9,6 +9,9 @@ public class Controller_1D_2P : MonoBehaviour {
     Vector3 posA = new Vector3(28,2,34);
     Vector3 posB = new Vector3(29,2,35);
 
+    private static int framerate = 10;
+    int periodFrameCount = 10 * framerate;
+
     float turnSpeed = 31f;
     int turnDir = 1;
 
@@ -16,13 +19,13 @@ public class Controller_1D_2P : MonoBehaviour {
 
     /* functions */
     void Start () {
-        Application.targetFrameRate = 10;
+        Application.targetFrameRate = framerate;
         rand = new Random();
     }
 
     void Update () {
 
-        if (Time.frameCount % 100 == 0) {
+        if (Time.frameCount % periodFrameCount == 0) {
             transform.position = (rand.Next(2) == 1) ? posA : posB;
 
             turnDir = (rand.Next(2) == 1) ? 1 : -1;
