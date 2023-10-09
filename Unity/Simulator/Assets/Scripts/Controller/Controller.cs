@@ -17,12 +17,12 @@ public class Controller : MonoBehaviour
 
     private const float maxDegrees = 45f;
 
-    private readonly Vector3[] pos = {new Vector3(28,2,34), new Vector3(20,2,32)};
+    private readonly Vector3[] pos = {new Vector3(148,2,154), new Vector3(152,2,145)};
 
     public enum PlaceCount {
         One,
-        Two,
-        Inf};
+        Two
+    };
 
     private Quaternion target;
     private float speed;
@@ -38,15 +38,15 @@ public class Controller : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = framerate;
+        transform.position = pos[0];
     }
 
     // Update is called once per frame
     void Update()
     {
         // Check if period has ended
-
         if (Time.frameCount % periodFrameCount == 0 || transform.rotation == target) {
-            speed = Random.Range(0f,1f);
+            speed = Random.Range(0.1f,1.5f);
 
             if (places == PlaceCount.Two && Time.frameCount % placePeriodFrameCount == 0){
                 transform.position = pos[Random.Range(0,2)];
@@ -56,24 +56,8 @@ public class Controller : MonoBehaviour
                 pitch ? Random.Range(-maxDegrees,maxDegrees) : 0,
                 yaw ? Random.Range(-maxDegrees,maxDegrees) : 0,
                 roll ? Random.Range(-maxDegrees,maxDegrees) : 0);
-
-            Debug.Log("target: " + target.eulerAngles);
         }
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * maxDegrees * 2 * speed / viewPeriodLen);
-        // transform.rotation = Quaternion.Lerp(transform.rotation, target, 1 / (periodFrameCount-t));
-        // Debug.Log("rotation: " + transform.rotation);
-        Debug.Log("rotation: " + transform.rotation.eulerAngles);
-
-        // Debug.Log("change: " + (transform.rotation * Quaternion.Inverse(oldRotation)));
     }
 }
-
-/*
-Places: 1, 2, inf
-Axes of Rotation: 1, 2, 3
-Max Rotation: 90 deg, 360 deg
-Degrees_per_frame_min:
-Degrees_per_frame_max:
-# worlds: forest, room, etc.
-*/
