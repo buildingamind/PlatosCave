@@ -19,7 +19,7 @@ MonoBehaviour:
   m_StartFrame: 0
   m_EndFrame: 0
   m_StartTime: 0
-  m_EndTime: 60
+  m_EndTime: 8000
   m_CapFrameRate: 1
   m_RecorderSettings:
   - {fileID: 2}
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: Movie
   m_EditorClassIdentifier: 
   enabled: 1
-  take: 2
+  take: 0
   captureEveryNthFrame: 1
   fileNameGenerator:
     m_Path:
@@ -44,7 +44,7 @@ MonoBehaviour:
       m_Leaf: Recordings
       m_ForceAssetFolder: 0
       m_AbsolutePath: 
-    m_FileName: movie_<Take>
+    m_FileName: vid_<Take>
   outputFormat: 0
   videoBitRateMode: 2
   captureAlpha: 0
@@ -57,12 +57,12 @@ MonoBehaviour:
   encoderColorDefinitionSelected: 0
   encoderCustomOptions: 
   m_ImageInputSelector:
-    m_Selected: gameViewInputSettings
+    m_Selected: cameraInputSettings
     gameViewInputSettings:
       m_OutputResolution:
-        m_CustomWidth: 1024
-        m_CustomHeight: 1024
-        imageHeight: 240
+        m_CustomWidth: 226
+        m_CustomHeight: 226
+        imageHeight: 2147483647
         maxSupportedHeight: 2160
         m_AspectRatio:
           m_CustomAspectX: 1
@@ -71,16 +71,16 @@ MonoBehaviour:
       flipFinalOutput: 0
     cameraInputSettings:
       m_OutputResolution:
-        m_CustomWidth: 1024
-        m_CustomHeight: 1024
-        imageHeight: 0
+        m_CustomWidth: 240
+        m_CustomHeight: 240
+        imageHeight: 2147483647
         maxSupportedHeight: 2160
         m_AspectRatio:
           m_CustomAspectX: 1
           m_CustomAspectY: 1
           m_ImageAspect: 1
       source: 4
-      cameraTag: 
+      cameraTag: Agent
       flipFinalOutput: 0
       captureUI: 0
     camera360InputSettings:
