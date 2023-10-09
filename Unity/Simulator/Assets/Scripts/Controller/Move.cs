@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class Move : MonoBehaviour
 {
     private const float min = 0f; // minimum coordinate value
-    private const float max = 240f; // maximum coordinate value
+    private const float max = 300f; // maximum coordinate value
     private const float edge = 25f; // distance from edge to avoid
 
     private const float minDist = 0.5f; // minimum distance to target before finding new target
