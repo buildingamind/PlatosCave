@@ -1,50 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Move : MonoBehaviour
 {
+    private const float min = 0f; // minimum coordinate value
+    private const float max = 240f; // maximum coordinate value
+    private const float edge = 25f; // distance from edge to avoid
+
+    private const float minDist = 0.5f; // minimum distance to target before finding new target
+
+    private const float walkMin = min + edge;
+    private const float walkMax = max - edge;
+
     private NavMeshAgent agent;
-    // [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Transform[] points;
 
-    private int destPoint = 0;
-    // [SerializeField] private Transform target;
-
-    void GotoNextPoint() {
-        // Returns if no points have been set up
-        if (points.Length == 0)
-            return;
-
-        // Set the agent to go to the currently selected destination.
-        agent.SetDestination(points[destPoint].position);
-
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
-        destPoint = (destPoint + 1) % points.Length;
+    // Calculates the next point to walk to 
+    Vector3 newPoint()
+    {
+        return new Vector3(Random.Range(walkMin, walkMax), 10, Random.Range(walkMin, walkMax));
     }
 
-    void Start () {
+    void Start() {
         agent = GetComponent<NavMeshAgent>();
-
         agent.autoBraking = true;
-
-        GotoNextPoint();
+        agent.SetDestination(newPoint());
     }
-
-
 
     // Update is called once per frame
-    private void Update()
-    {
-        if (points != null)
-        {
-            agent.SetDestination(points[0].position);
-            // Choose the next destination point when the agent gets
-            // close to the current one.
-            if (!agent.pathPending && agent.remainingDistance < 0.1f)
-                GotoNextPoint();
-        }
+    private void Update() {
+        if (!agent.pathPending && agent.remainingDistance < minDist)
+            agent.SetDestination(newPoint());
     }
 }
